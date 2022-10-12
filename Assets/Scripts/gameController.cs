@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class gameController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject kaynakNoktasi;
+    public GameObject[] olusacakNesne;
+    int sirano = 0;
     void Start()
     {
+        StartCoroutine(objeOlustur());
+        
         
     }
 
@@ -14,5 +18,34 @@ public class gameController : MonoBehaviour
     void Update()
     {
         
+        
+
+    }
+
+    IEnumerator objeOlustur()
+    {
+        while (true)
+        {
+
+            if(sirano <= 8)
+            {
+                olusacakNesne[sirano].SetActive(true);
+                olusacakNesne[sirano].transform.position = kaynakNoktasi.transform.position;
+
+            }
+            else
+            {
+
+                sirano = 0;
+                olusacakNesne[sirano].SetActive(true);
+                olusacakNesne[sirano].transform.position = kaynakNoktasi.transform.position;
+            }
+            
+
+            sirano++;
+            yield return new WaitForSecondsRealtime(.5f);
+
+        }
+
     }
 }
